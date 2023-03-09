@@ -1,18 +1,25 @@
 # adventofcode.com 2022 day05 part 1
+#
+# This code is split into two parts:
+# * 1st part has the stacks of boxes
+# * 2nd part has the steps for restacking the boxes
 filename = 'input_test.txt'
 data1 = []
-data2 = []
+steps = []
 flag = True
 data1 = []
 with open(filename) as f:
     line = f.readline() 
 
+
     while line:
+        # Check if 1st part has finished
         if line.strip() == "":
             flag = False
             line = f.readline()
             continue
         
+        # 1st part of input file 
         if flag:
             if line[1] == "1":
                 line = f.readline()
@@ -23,6 +30,12 @@ with open(filename) as f:
                 row.append(line[i])
             print("")
             data1.append(row)
+
+        # second part of input file. Moving boxes around 
+        if not flag:
+            step = {'move': line[5], 'from': line[12], 'to': line[17]}
+            steps.append(step)
+
 
         line = f.readline()
 data_temp = []
@@ -38,6 +51,7 @@ print(data_temp)
 
 
 print(data1)
+print(steps)
 
 
 #print(data)
