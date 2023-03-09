@@ -3,7 +3,8 @@
 # This code is split into two parts:
 # * 1st part has the stacks of boxes
 # * 2nd part has the steps for restacking the boxes
-filename = 'input_test.txt'
+#filename = 'input_test.txt'
+filename = 'input.txt'
 data1 = []
 steps = []
 flag = True
@@ -33,7 +34,8 @@ with open(filename) as f:
 
         # second part of input file. Moving boxes around 
         if not flag:
-            step = {'move': int(line[5]), 'from': int(line[12]), 'to': int(line[17])}
+            temp_split = line.split()
+            step = {'move': int(temp_split[1]), 'from': int(temp_split[3]), 'to': int(temp_split[5])}
             steps.append(step)
 
 
