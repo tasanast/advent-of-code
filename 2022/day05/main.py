@@ -26,32 +26,53 @@ with open(filename) as f:
                 continue
             row = []
             for i in range(1,len(line), 4):
-                print(line[i], end='|')
+                #DEBUG#print(line[i], end='|')
                 row.append(line[i])
-            print("")
+            #DEBUG#print("")
             data1.append(row)
 
         # second part of input file. Moving boxes around 
         if not flag:
-            step = {'move': line[5], 'from': line[12], 'to': line[17]}
+            step = {'move': int(line[5]), 'from': int(line[12]), 'to': int(line[17])}
             steps.append(step)
 
 
         line = f.readline()
-data_temp = []
+
+
+
+stacks = []
 for i in range(0, len(data1[0])):
     column = []
     for j in range(len(data1)-1, -1, -1):
         if data1[j][i] != ' ':
             column.append(data1[j][i])
-    data_temp.append(column)
+    stacks.append(column)
 
-print(data_temp)
+#DEBUG#print(stacks)
 
 
 
-print(data1)
-print(steps)
+#print(data1)
+#DEBUG#print(steps)
+
+# Move boxes around and find final positions
+for i, step in enumerate(steps):
+    #DEBUG#print('step: ', i)
+    # number of boxes to move from a stack
+    for i in range(0, step['move']):
+        # get the top box of a stack and move it to the top of another stack
+        box = stacks[step['from']-1].pop()
+        #DEBUG#print(box)
+        stacks[step['to']-1].append(box)
+
+#DEBUG#print(stacks)
+
+# print top boxes
+for stack in stacks:
+    print(stack[-1], end="")
+print('')
+
 
 
 #print(data)
